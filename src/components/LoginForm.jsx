@@ -7,7 +7,16 @@ export default function LoginForm({ onLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password) onLogin();
+    if (email && password) {
+      localStorage.setItem('user', JSON.stringify({
+        email: email.trim(),
+        password: password, 
+        loginTime: new Date().toISOString(),
+        isLoggedIn: true
+      }));
+
+      if (onLogin) onLogin();
+    }
   };
 
   return (
@@ -162,7 +171,7 @@ export default function LoginForm({ onLogin }) {
                 >
                     
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="11" viewBox="0 0 15 11" fill="none">
-                        <path d="M14.0833 5.41667C12.3053 8.528 10.0833 10.0833 7.41667 10.0833C4.75 10.0833 2.528 8.528 0.75 5.41667C2.528 2.30533 4.75 0.75 7.41667 0.75C10.0833 0.75 12.3053 2.30533 14.0833 5.41667" stroke="#2F2B3D" stroke-opacity="0.9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14.0833 5.41667C12.3053 8.528 10.0833 10.0833 7.41667 10.0833C4.75 10.0833 2.528 8.528 0.75 5.41667C2.528 2.30533 4.75 0.75 7.41667 0.75C10.0833 0.75 12.3053 2.30533 14.0833 5.41667" stroke="#2F2B3D" strokeOpacity="0.9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 </span>
               </div>
@@ -195,11 +204,6 @@ export default function LoginForm({ onLogin }) {
                 border: 'none',
                 borderRadius: '8px',
                 fontSize: '15px',
-                // border-radius: border-radius-md,
-                // background: var(--Color-Palette-CMC-main, #007AFF),
-
-                /* Light/elevation/primary/primary-shadow-sm */
-                // box-shadow: 0 2px 6px 0 rgba(115, 103, 240, 0.30),
                 fontWeight: '600',
                 boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)'
                 
